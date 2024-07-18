@@ -6,7 +6,16 @@ import OrderFood from '../assets/Images/orderFood.png';
 import Pickup from '../assets/Images/pickup.png';
 import Enjoy from '../assets/Images/enjoy.png';
 import Layout from "../Layouts/Layout"
-function Home() {   
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllProducts } from "../Redux/Slices/ProductSlice";
+function Home() {  
+    const dispatch = useDispatch(); 
+    const { productsData } = useSelector((state)=>state.product) //from AuthSlice and productSlice, we are fetching the details of productSlice
+    useEffect(()=>{
+        //This will be called when the component mounts
+        dispatch(getAllProducts());
+    },[]) //[] means the effect will be called once only after component mounts
     return (
         <Layout>
         <div>
@@ -151,6 +160,7 @@ function Home() {
 
                 </div>
             </section>
+            {productsData.map((product) => <div key={product._id}>{product.productName}</div>)}
         </div>
         </Layout>
         
