@@ -5,17 +5,19 @@ import IconPatchCheck from "../Components/Icons/IconPatchCheck";
 import OrderFood from '../assets/Images/orderFood.png';
 import Pickup from '../assets/Images/pickup.png';
 import Enjoy from '../assets/Images/enjoy.png';
-import Layout from "../Layouts/Layout"
+import Layout from "../Layouts/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllProducts } from "../Redux/Slices/ProductSlice";
-function Home() {  
-    const dispatch = useDispatch(); 
-    const { productsData } = useSelector((state)=>state.product) //from AuthSlice and productSlice, we are fetching the details of productSlice
-    useEffect(()=>{
-        //This will be called when the component mounts
+import { Link } from "react-router-dom";
+function Home() { 
+    const dispatch = useDispatch();
+
+    const { productsData } = useSelector((state) => state.product);
+    useEffect(() => {
+        // This will be called when the component mounts
         dispatch(getAllProducts());
-    },[]) //[] means the effect will be called once only after component mounts
+    }, []);
     return (
         <Layout>
         <div>
@@ -98,17 +100,11 @@ function Home() {
                                 <span className="font-bold title-font">Food hygeine guaranteed</span>
                             </div>
                         </div>
-
                         <div className="px-5 py-4 mx-auto">
-
                             <div className="flex justify-center py-4">
-
                                 <div className="inline-flex w-16 h-1 bg-yellow-500 rounded-full"></div>
-
                             </div>
-
                             <div className="flex flex-wrap space-y-6 md:space-y-0">
-
                                 <div className="flex flex-col items-center text-center p-4 md:w-1/3">
                                     <div className="inline-flex items-center justify-center flex-shrink-0 w-20 h-20 mb-5 bg-yellow-100 rounded-full">
                                         <img src={OrderFood} />
@@ -121,7 +117,6 @@ function Home() {
                                             As easy as 1, 2, 3. Just select your favorite pizza and place your order.
                                         </p>
                                     </div>
-
                                 </div>
                                 <div className="flex flex-col items-center text-center p-4 md:w-1/3">
                                     <div className="inline-flex items-center justify-center flex-shrink-0 w-20 h-20 mb-5 bg-yellow-100 rounded-full">
@@ -135,7 +130,6 @@ function Home() {
                                             Pick up your order from the nearest store or get it delivered to your doorstep.
                                         </p>
                                     </div>
-
                                 </div>
                                 <div className="flex flex-col items-center text-center p-4 md:w-1/3">
                                     <div className="inline-flex items-center justify-center flex-shrink-0 w-20 h-20 mb-5 bg-yellow-100 rounded-full">
@@ -149,21 +143,54 @@ function Home() {
                                             As soon as you get your order, enjoy the delicious pizza with your loved ones.
                                         </p>
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
-
+                        
                     </div>
-
                 </div>
+
             </section>
-            {productsData.map((product) => <div key={product._id}>{product.productName}</div>)}
+            <div className="mx-auto">
+                <div className="flex flex-wrap justify-center">
+                    {productsData.map((item) => {
+                        return (
+                            item.inStock && (
+                                <div className="p-4 md:w-1/3" key={item._id}>
+                                    <Link to={`/product/${item._id}`}>
+                                        <div className="overflow-hidden border rounded-lg border-opacity-60">
+                                            <img 
+                                                src={item.productImage}
+                                                alt="Pizza Image"
+                                                className="object-cover object-center w-full lg:h-48 md:h-36"
+                                            />
+                                            <div className="p-6 border">
+                                                <h2 className="text-xs font-medium tracking-widest text-gray-400 title-font">
+                                                    {item.category}
+                                                </h2>
+                                                <h1 className="mb-3 text-lg font-medium text-gray-900 title-font">
+                                                    {item.productName}
+                                                </h1>
+                                                <p className="mb-4 text-base leading-relaxed">
+                                                    {item.description}
+                                                </p>
+                                                <p className="text-lg font-medium text-gray-900 title-font">
+                                                    ${item.price}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+                            )
+                        )
+                    })}
+                </div>
+            </div>
+
+
+
         </div>
         </Layout>
-        
     );
 }
 export default Home;
