@@ -1,4 +1,3 @@
-// icon:patch-check | Bootstrap https://icons.getbootstrap.com/ | Bootstrap
 function IconPatchCheck(props) {
   return (
     <svg
@@ -18,3 +17,5 @@ function IconPatchCheck(props) {
 }
 
 export default IconPatchCheck;
+
+  

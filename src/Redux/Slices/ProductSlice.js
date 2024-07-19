@@ -19,6 +19,7 @@ export const getAllProducts = createAsyncThunk('/products/getAll', async () => {
     } catch(error) {
         console.log(error);
         toast.error('Something went wrong');
+        throw error;
     }
 });
 
@@ -35,13 +36,14 @@ export const getproductDetails = createAsyncThunk('/products/getDetails', async 
     } catch(error) {
         console.log(error);
         toast.error('Something went wrong');
+        throw error;
     }
 });
 
 const productSlice = createSlice({
     name: 'product',
     initialState,
-    redicers: {},
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getAllProducts.fulfilled, (state, action) => {
             console.log(action.payload);
