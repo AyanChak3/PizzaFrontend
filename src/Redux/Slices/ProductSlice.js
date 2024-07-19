@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axiosInstance from "../../Helpers/axiosInstance";
 import toast from "react-hot-toast";
+
 const initialState = {
     productsData: [], // Array of products
 }
+
 export const getAllProducts = createAsyncThunk('/products/getAll', async () => {
     try {
         const products = axiosInstance.get('/products');
@@ -47,4 +49,5 @@ const productSlice = createSlice({
         });
     }
 });
+
 export default productSlice.reducer;

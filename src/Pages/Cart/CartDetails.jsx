@@ -102,7 +102,7 @@ function CartDetails() {
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <dl className="flex items-center justify-between gap-4">
-
+                        
                         {
                             cartDetails?.items.map((item) => {
                                 return (
@@ -115,7 +115,7 @@ function CartDetails() {
                             })
                         }
 
-
+                        
                       </dl>
                     </div>
 

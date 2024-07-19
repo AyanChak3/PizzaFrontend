@@ -16,7 +16,7 @@ function ProductDetails() {
         const details = await dispatch(getproductDetails(productId));
         console.log(details);
         setProductDetails(details?.payload?.data?.data);
-
+        
     }
 
     async function handleCart() {
@@ -152,7 +152,7 @@ function ProductDetails() {
                   </span>
                 </div>
                 <p className="leading-relaxed">{productDetails?.description}</p>
-
+  
                 <div className="flex pt-5">
                   <span className="text-2xl font-medium text-gray-900 title-font">
                     ₹{productDetails?.price}
@@ -178,7 +178,7 @@ function ProductDetails() {
           </div>
         </section>
       </Layout>
-
+    
     )
 }
 
